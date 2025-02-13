@@ -1,0 +1,241 @@
+<!-- 
+
+	El siguiente codigo es un archivo SFC (Single File Component) , en donde encapsula el estilo, logica y el template html de una vista en vue, en ella encontraras los bloques <template> , <script> y <style> 
+
+/***PRUEBA CSS ****///
+
+Escribir el código CSS necesario en el template html de vue para:
+
+
+Todos los textos del body estén centrados
+
+
+El div contenedor tenga un ancho fijo de 600px
+
+El div contenedor esté centrado horizontalmente
+
+El div contenedor debe tener un margen interno (padding) de 10px y un margin abajo de 10px
+
+Agregar un borde de 1px (dotted o dashed) gris al contenedor.
+
+
+
+(Lo que se especifica DENTRO del contenedor no debe afectar a los que están fuera, salvo que diga expresamente dentro y fuera)
+
+El bloque 1 dentro del contenedor debe tener un ancho de 100px y un margen arriba de 70px
+
+El bloque 2 dentro del contenedor debe tener un ancho de 100px
+
+
+
+Los bloques dentro del contenedor deben flotar hacia la izquierda y tener un margen de 5px en todas las direcciones.
+
+Los bloques fuera del contenedor no deben flotar
+
+
+
+
+
+Agregar un div dentro del código html que utilice la clase "clear" ya definida para asegurar que el primer conjunto de bloques 1 y 2 queden dentro del borde del contenedor
+
+
+
+Los bloques 1 (dentro y fuera) deben tener fondo rojo, texto blanco
+
+Los bloques 2 (dentro y fuera) deben tener fondo amarillo, texto negro
+
+
+
+El  párrafo (<p></p>) del bloque1 dentro del contenedor debe aparecer en itálica.
+
+El  párrafo (<p></p>) del bloque2 dentro y fuera del contenedor debe aparecer en negrita.
+
+Todos los párrafos (<p></p>) deben tener un margen interno de 10px (padding)
+
+
+
+Debe verse "virtualmente" igual en IE, Firefox y Safari o Chrome
+
+Se debe tratar de aprovechar la herencia.
+
+
+/*PRUEVA VUE Js  */
+
+- En el template html dentro del div con la clase 'v-container', generar un listado de divs con la data  del arreglo(array) 'myarray', que esta vacio, 
+ editar el array para que contenga 5 objetos, cada objeto con la siguientes propiedades : 'id' tipo entero, name: tipo string, roles: tipo array de enteros(minimo dos numeros en el array). 
+ Ej de objeto : {id:1, name:'Carlos', roles: [1,2]}
+
+- En cada div generado imprimir la siguiente salida Nombre: "nombre del elemento" , roles : "string de los numeros de roles separados por comas",
+- En cada div que sea de un elemento con indice impar agregarle un background gris  #e6e6e6, con binds de style o class  y ocultar los elementos con índice par.
+
+- En el div con class btn , agregar un evento click de vue con una funcion que al hacer click genere una salida, en el dato output que es un string , en este string se edite , 
+y se imprima en el div de clase 'output' de la siguiente manera 'el total de listado es: 'total', el resultado en total debe ser ser un dato o variable computada.
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+
+	<div id="app">
+
+		<div id="contenedor">
+
+			<div class="bloque1">
+
+				<p>Este es el Bloque 1 dentro del contenedor.</p>
+
+			</div>
+
+			<div class="bloque2">
+
+				<p>Este es el contenido del Bloque 2 dentro del contenedor, este contiene mas texto, por eso debe ser
+					mas largo.</p>
+
+			</div>
+
+		</div>
+
+		<div class="bloque1">
+
+			<p>Este es el Bloque 1 fuera del contenedor.</p>
+
+		</div>
+
+		<div class="bloque2">
+
+			<p>Este es el Bloque 2 fuera del contenedor.</p>
+
+		</div>
+
+		<div class="v-container">
+			<div v-for="(item, index) in myArray" :key="item.id">
+				<div v-if="index % 2 !== 0" :class="{ 'gris': index % 2 !== 0 }">
+					Nombre: {{ item.name }}, Roles: {{ item.roles.join(', ') }}
+				</div>
+			</div>
+
+		</div>
+		<div class="btn" @click="salida">
+			Generar
+		</div>
+		<div class="output">
+			{{ output }}
+
+
+		</div>
+
+	</div>
+
+
+</body>
+
+</html>
+
+
+<script>
+
+	const { createApp } = Vue
+
+	createApp({
+		name: 'SupportView',
+		components: {
+
+		},
+		data(
+			output = ""
+		) {
+			return {
+				myArray: [
+					{ id: 1, name: 'sofia riascos ', roles: [1, 2] },
+					{ id: 2, name: 'Luis carlos galan', roles: [3, 4] },
+					{ id: 3, name: 'maria socorro', roles: [2, 5] },
+					{ id: 4, name: 'ana maria zamora', roles: [1, 4] },
+					{ id: 5, name: 'Carlos osorio', roles: [6, 5] }
+				],
+				output: "",
+
+			}
+		},
+		computed: {
+			Total() {
+				return this.myArray.length;
+			}
+
+		},
+		methods: {
+			salida() {
+				this.output = `El total del listado es: ${this.Total}`;
+			}
+
+		}
+
+	}).mount('#app')
+
+</script>
+
+<style type="text/css">
+	.clear {
+		clear: both;
+	}
+
+	/* Completar aquí la respuesta  */
+
+
+	body {
+		text-align: center;
+	}
+
+	#contenedor {
+		width: 600px;
+		height: 600px;
+		margin: 0 auto;
+		padding: 10px;
+		margin-bottom: 10px;
+		border: 1px dashed gray;
+	}
+
+	.bloque1,
+	.bloque2 {
+		width: 100px;
+		float: left;
+		margin: 5px;
+		padding: 10px;
+	}
+
+	.bloque1 {
+		background-color: red;
+		color: white;
+	}
+
+	.bloque2 {
+		background-color: yellow;
+		color: black;
+	}
+
+	.bloque1 p {
+		font-style: italic;
+	}
+
+	.bloque2 p {
+		font-weight: bold;
+	}
+
+	.gris{
+		background-color: #e6e6e6;
+	}
+
+
+	.v-container div {
+		padding: 10px;
+		margin: 5px;
+	}
+</style>
